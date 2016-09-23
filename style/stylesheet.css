@@ -1,0 +1,15 @@
+.display
+{
+  display: none;
+}
+
+li.edit .display
+{
+  display: inline;
+}
+
+li.edit input,
+li.edit button.sub-btn
+{
+  display: none;
+}
