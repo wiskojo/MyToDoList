@@ -3,16 +3,26 @@
   <head>
     <title>My TODO List</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
     <link rel="stylesheet" href="style/stylesheet.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/events.js"></script>
     <script src="js/main.js"></script>
+
   </head>
   <body>
-    <h1>My TODO List</h1>
-    <ul id="tasks"></ul>
-    <button id="add-task">Add Task</button>
+    <div id="body">
+      <h1>My TODO List</h1>
+      <button id="sort">Sort</button>
+      <ul id="tasks" class="sortable"></ul>
+      <button id="add-task">Add Task</button>
+    </div>
   </body>
 </html>

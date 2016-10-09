@@ -12,21 +12,18 @@ $(function()
 
     if($task.attr("data-num") == undefined)
     {
-      do
-      {
-        var idNum = Math.floor(Math.random() * TASK_LIMIT) + 1;
-      }
-      while(localStorage.getItem("task-" + idNum) != undefined);
+      var idNum = JSON.stringify($task).hashCode();
 
       $task.attr("data-num", idNum);
       localStorage.setItem("task-" + idNum,
-        "<li class=\"task\" data-num=\"" + idNum
+        "<li class=\"" + $task.attr("class") + "\" data-num=\"" + idNum
         + "\">" + $task.html() + "</li>");
     }
     else
     {
       localStorage.setItem("task-" + $task.attr("data-num"),
-        "<li class=\"task\" data-num=\"" + $task.attr("data-num")
+        "<li class=\"" + $task.attr("class") + "\" data-num=\""
+          + $task.attr("data-num")
           + "\">" + $task.html() + "</li>");
     }
   });
@@ -50,7 +47,7 @@ $(function()
 
     if($task.attr("data-num") != undefined)
     {
-      alert("item removed");
+      alert("Item removed");
       localStorage.removeItem("task-" + $task.attr("data-num"));
     }
 
@@ -71,8 +68,22 @@ $(function()
     }
   }, ".task .display, .task button.edit-btn");
 
+  $("ul#tasks").on("click", ".task", function(evt)
+  {
+    if(evt.offsetX < 1 && $(this).children(".display").is(":visible"))
+    {
+      toggleState($(this));
+      updateStorage($(this));
+    }
+  });
+
   $("button#add-task").click(function()
   {
     createTask();
+  });
+
+  $("#sort").click(function()
+  {
+    sort();
   });
 }); // End Main

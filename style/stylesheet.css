@@ -1,4 +1,108 @@
-.display, .edit-btn
+body
 {
+  background-color: #333333;
+  font-family: "Open Sans";
+}
+
+h1
+{
+  color: white;
+}
+
+ul
+{
+  padding-left: 0;
+}
+
+button
+{
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 7px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.task
+{
+  position: relative;
+  height: 30px;
+  width: 92%;
+  list-style-type: none;
+  border-style: hidden;
+  border-left: 10px solid blue;
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-top: 1px;
+}
+
+.sub-btn, .rmv-btn
+{
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.edit-btn
+{
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
   display: none;
+  font-size: 12px;
+}
+
+.date
+{
+  position: absolute;
+  right: 15px;
+  top: 25%;
+}
+
+.task.almost-completed
+{
+  background-color: #B3EDFF;
+  border-left: 10px solid #5495FF;
+}
+
+.task.completed
+{
+  background-color: #84E184;
+  border-left: 10px solid green;
+}
+
+.task.not-started
+{
+  background-color: #FF8080;
+  border-left: 10px solid red;
+}
+.task.in-progress
+{
+  background-color: #FFB366;
+  border-left: 10px solid orange;
+}
+
+#body
+{
+  position: relative;
+  left: 3%;
+}
+
+#sort
+{
+  position: fixed;
+  display: block;
+  top: 10px;
+  right: 10px;
 }
