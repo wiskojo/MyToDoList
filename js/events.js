@@ -47,7 +47,6 @@ $(function()
 
     if($task.attr("data-num") != undefined)
     {
-      alert("Item removed");
       localStorage.removeItem("task-" + $task.attr("data-num"));
     }
 
@@ -85,5 +84,17 @@ $(function()
   $("#sort").click(function()
   {
     sort();
+  });
+
+  $(window).scroll(function()
+  {
+    if( $(this).scrollTop() > 50 )
+    {
+      $("#sort").fadeOut( 0 );
+    }
+    else
+    {
+      $("#sort").fadeIn();
+    }
   });
 }); // End Main
