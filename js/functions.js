@@ -16,6 +16,11 @@ function createTask()
   $("ul#tasks").append(task);
 }
 
+function createCategory()
+{
+  $("#category-dialog").dialog("open");
+}
+
 function initializeList()
 {
   $("#tasks").sortable();
@@ -68,6 +73,11 @@ String.prototype.hashCode = function()
   }
   return hash;
 };
+
+function addToStorage(type, $pointer)
+{
+  // TODO addToStorage helper function
+}
 
 function updateStorage($task)
 {

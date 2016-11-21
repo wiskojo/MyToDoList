@@ -56,7 +56,8 @@ $(function()
   $("ul#tasks").on({
     mouseenter: function()
     {
-      if($(this).parent().children(".sub-btn").is(":hidden"))
+      if(   $(this).parent().parent().hasClass("category")
+         || $(this).parent().children(".sub-btn").is(":hidden"))
       {
         $(this).parent().children(".edit-btn").show();
       }
@@ -65,7 +66,8 @@ $(function()
     {
       $(this).parent().children(".edit-btn").hide();
     }
-  }, ".task .display, .task button.edit-btn");
+  }, ".task .display, .task button.edit-btn, \
+     .category div span, .category div .edit-btn");
 
   $("ul#tasks").on("click", ".task", function(evt)
   {
@@ -86,11 +88,46 @@ $(function()
     sort();
   });
 
+  $("button#add-category").click(function()
+  {
+    createCategory();
+  });
+
+  $("#category-dialog").dialog({
+    autoOpen: false,
+    modal: true
+  });
+
+  $("#category-dialog button").on("click", function()
+  {
+    var $dialog = $(this).parent();
+
+    var category = $($.parseHTML(
+                    "<li class=\"category\">" +
+                     "<div>" +
+                      "<span>" + $dialog.children("input").val() + "</span>" +
+                      "<button class=\"edit-btn\">Remove</button>" +
+                     "</div>" +
+                    "</li>"));
+    $("ul#tasks").append(category);
+
+    //TODO add to local storage
+
+    $dialog.dialog("close");
+  });
+
+  $("ul#tasks").on("click", ".category div button", function()
+  {
+    //TODO remove from local storage
+
+    $(this).parent().parent().remove();
+  });
+
   $(window).scroll(function()
   {
     if( $(this).scrollTop() > 50 )
     {
-      $("#sort").fadeOut( 0 );
+      $("#sort").hide();
     }
     else
     {

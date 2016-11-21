@@ -49,6 +49,7 @@ button
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+  margin-left: 10px;
 }
 
 .edit-btn
@@ -93,6 +94,35 @@ button
   border-left: 10px solid orange;
 }
 
+.task input[type=date]
+{
+  height: 17px;
+}
+
+.task input
+{
+  margin-right: 10px;
+}
+
+.category
+{
+  color: white;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  list-style: none;
+}
+
+.category button
+{
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  display: none;
+}
+
 #body
 {
   position: relative;
@@ -105,4 +135,14 @@ button
   display: block;
   top: 10px;
   right: 10px;
+}
+
+#category-dialog
+{
+  display: none;
+}
+
+#category-dialog button
+{
+  margin-top: 10px;
 }
