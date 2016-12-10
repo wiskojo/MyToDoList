@@ -2,7 +2,7 @@ TASK_LIMIT = 100000;
 
 function createTask()
 {
-  var task = $($.parseHTML(
+  var $task = $($.parseHTML(
              "<li class=\"task not-started\">" +
               "<input value=\"Task Description\"></input>" +
               "<span class=\"display des\"></span>" +
@@ -13,10 +13,25 @@ function createTask()
               "<button class=\"rmv-btn\">Remove</button>" +
              "</li>"));
 
-  $("ul#tasks").append(task);
+  $("ul#tasks").append($task);
 }
 
-function createCategory()
+function createCategory(name)
+{
+  var $category = $($.parseHTML(
+                  "<li class=\"category\">" +
+                   "<div>" +
+                    "<span>" + name + "</span>" +
+                    "<button class=\"edit-btn\">Remove</button>" +
+                   "</div>" +
+                  "</li>"));
+
+  $("ul#tasks").append($category);
+
+  return $category;
+}
+
+function addCategory()
 {
   $("#category-dialog").dialog("open");
 }
@@ -69,14 +84,29 @@ String.prototype.hashCode = function()
   {
     chr   = this.charCodeAt(i);
     hash  = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
+    hash |= 0;
   }
   return hash;
 };
 
 function addToStorage(type, $pointer)
 {
-  // TODO addToStorage helper function
+  if($pointer.attr("data-num") == undefined)
+  {
+    var idNum = $pointer.prop("outerHTML").hashCode();
+
+    $pointer.attr("data-num", idNum);
+    localStorage.setItem(type + "-" + idNum,
+      "<li class=\"" + $pointer.attr("class") + "\" data-num=\"" + idNum
+      + "\">" + $pointer.html() + "</li>");
+  }
+  else
+  {
+    localStorage.setItem(type + "-" + $pointer.attr("data-num"),
+      "<li class=\"" + $pointer.attr("class") + "\" data-num=\""
+        + $pointer.attr("data-num")
+        + "\">" + $pointer.html() + "</li>");
+  }
 }
 
 function updateStorage($task)

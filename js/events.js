@@ -10,22 +10,7 @@ $(function()
 
     $task.children("input, .sub-btn, .rmv-btn").hide();
 
-    if($task.attr("data-num") == undefined)
-    {
-      var idNum = JSON.stringify($task).hashCode();
-
-      $task.attr("data-num", idNum);
-      localStorage.setItem("task-" + idNum,
-        "<li class=\"" + $task.attr("class") + "\" data-num=\"" + idNum
-        + "\">" + $task.html() + "</li>");
-    }
-    else
-    {
-      localStorage.setItem("task-" + $task.attr("data-num"),
-        "<li class=\"" + $task.attr("class") + "\" data-num=\""
-          + $task.attr("data-num")
-          + "\">" + $task.html() + "</li>");
-    }
+    addToStorage("task", $task);
   });
 
   $("ul#tasks").on("click", "button.edit-btn", function()
@@ -90,7 +75,7 @@ $(function()
 
   $("button#add-category").click(function()
   {
-    createCategory();
+    addCategory();
   });
 
   $("#category-dialog").dialog({
@@ -100,32 +85,27 @@ $(function()
 
   $("#category-dialog button").on("click", function()
   {
-    var $dialog = $(this).parent();
+    var $category = createCategory($(this).parent().children("input").val());
+    addToStorage("category", $category);
 
-    var category = $($.parseHTML(
-                    "<li class=\"category\">" +
-                     "<div>" +
-                      "<span>" + $dialog.children("input").val() + "</span>" +
-                      "<button class=\"edit-btn\">Remove</button>" +
-                     "</div>" +
-                    "</li>"));
-    $("ul#tasks").append(category);
-
-    //TODO add to local storage
-
-    $dialog.dialog("close");
+    $(this).parent().dialog("close");
   });
 
   $("ul#tasks").on("click", ".category div button", function()
   {
-    //TODO remove from local storage
+    var $category = $(this).parent().parent();
 
-    $(this).parent().parent().remove();
+    if($category.attr("data-num") != undefined)
+    {
+      localStorage.removeItem("category-" + $category.attr("data-num"));
+    }
+
+    $category.remove();
   });
 
   $(window).scroll(function()
   {
-    if( $(this).scrollTop() > 50 )
+    if($(this).scrollTop() > 50)
     {
       $("#sort").hide();
     }
